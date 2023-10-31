@@ -8,13 +8,13 @@ namespace API_RadiadoresDiaz.Context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public DbSet<Autos> Autos { get; set; }
-        public DbSet<AutoProducto> AutoProductos { get; set; }
-        public DbSet<Marca> Marcas { get; set; }
-        public DbSet<MarcaAuto> MarcaAutos { get; set; }
+        public DbSet<Autos> Auto { get; set; }
+        public DbSet<AutoProducto> AutoProducto { get; set; }
+        public DbSet<Marca> Marca { get; set; }
+        public DbSet<MarcaAuto> MarcaAuto { get; set; }
 
-        public DbSet<Producto> Productos { get; set; }
-        public DbSet<Proveedor> Proveedors { get; set; }
-        public DbSet<TipoProducto> TipoProductos { get; set; }
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<Proveedor> Proveedor { get; set; }
+        public DbSet<TipoProducto> TipoProducto { get; set; }
     }
 }

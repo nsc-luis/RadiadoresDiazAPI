@@ -10,5 +10,6 @@ namespace API_RadiadoresDiaz.Models
         public string modelo { get; set; }
         public int year { get; set; }
         public string motor { get; set; }
+        public DateTime registro { get; set; }
     }
 }
