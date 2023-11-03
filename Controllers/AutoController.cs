@@ -15,6 +15,24 @@ namespace API_RadiadoresDiaz.Controllers
             this.context = context;
         }
 
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
+        [Route("[action]")]
+        public IActionResult ListaAuto()
+        {
+            try
+            {
+                var autos = context.Auto.ToList();
+                return Ok(autos);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         // GET api/PorModelo
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]

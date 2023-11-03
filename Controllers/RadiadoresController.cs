@@ -25,6 +25,23 @@ namespace API_RadiadoresDiaz.Controllers
             public string? motor { get; set; }
         }
 
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
+        [Route("[action]")]
+        public IActionResult ListaRadiadores()
+        {
+            try
+            {
+                var radiadores = context.Producto.ToList();
+                return Ok(radiadores);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+            }
+        }
+
         // GET api/PorMarca/{marca}
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
