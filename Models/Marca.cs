@@ -8,6 +8,6 @@ namespace API_RadiadoresDiaz.Models
         public int IdMarca { get; set; }
         [Required]
         public string NombreMarca { get; set; }
-        public DateTime registro { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }

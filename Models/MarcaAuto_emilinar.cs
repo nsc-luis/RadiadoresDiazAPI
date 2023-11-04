@@ -2,7 +2,7 @@
 
 namespace API_RadiadoresDiaz.Models
 {
-    public class MarcaAuto
+    public class MarcaAuto_emilinar
     {
         [Key]
         public int IdMarcaAuto { get; set; }

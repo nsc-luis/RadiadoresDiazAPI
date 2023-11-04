@@ -8,5 +8,6 @@ namespace API_RadiadoresDiaz.Models
         public int IdProveedor { get; set; }
         [Required]
         public string NombreProveedor { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }

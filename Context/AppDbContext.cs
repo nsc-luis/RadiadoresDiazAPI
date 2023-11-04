@@ -11,7 +11,7 @@ namespace API_RadiadoresDiaz.Context
         public DbSet<Autos> Auto { get; set; }
         public DbSet<AutoProducto> AutoProducto { get; set; }
         public DbSet<Marca> Marca { get; set; }
-        public DbSet<MarcaAuto> MarcaAuto { get; set; }
+        public DbSet<MarcaAuto_emilinar> MarcaAuto { get; set; }
 
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }

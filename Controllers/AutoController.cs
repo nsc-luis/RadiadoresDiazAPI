@@ -24,11 +24,11 @@ namespace API_RadiadoresDiaz.Controllers
             try
             {
                 var autos = (from a in context.Auto
-                             join ma in context.MarcaAuto on a.idAuto equals ma.IdAuto
-                             join m in context.Marca on ma.IdMarca equals m.IdMarca
+                             join m in context.Marca on a.idMarca equals m.IdMarca
                              where a.modelo == modelo
                              select new
                              {
+                                 m.IdMarca,
                                  m.NombreMarca,
                                  a.modelo,
                                  a.year,
@@ -51,11 +51,38 @@ namespace API_RadiadoresDiaz.Controllers
             try
             {
                 var autos = (from a in context.Auto
-                             join ma in context.MarcaAuto on a.idAuto equals ma.IdAuto
-                             join m in context.Marca on ma.IdMarca equals m.IdMarca
+                             join m in context.Marca on a.idMarca equals m.IdMarca
                              where a.year == year
                              select new
                              {
+                                 m.IdMarca,
+                                 m.NombreMarca,
+                                 a.modelo,
+                                 a.year,
+                                 a.motor
+                             }).ToList();
+                return Ok(autos);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        // GET api/PorMarca
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
+        [Route("[action]")]
+        public IActionResult PorMarca(int idMarca)
+        {
+            try
+            {
+                var autos = (from a in context.Auto
+                             join m in context.Marca on a.idMarca equals m.IdMarca
+                             where a.idMarca == idMarca
+                             select new
+                             {
+                                 m.IdMarca,
                                  m.NombreMarca,
                                  a.modelo,
                                  a.year,

@@ -30,6 +30,6 @@ namespace API_RadiadoresDiaz.Models
         [Required]
         public int IdProveedor { get; set; }
         public int existencia { get; set; }
-        public DateTime registro { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace API_RadiadoresDiaz.Models
         public int IdAuto { get; set; }
         [Required]
         public int IdProducto { get; set; }
+        public DateTime timestamp { get; set; }
     }
 }
