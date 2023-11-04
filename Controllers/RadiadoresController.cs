@@ -42,6 +42,43 @@ namespace API_RadiadoresDiaz.Controllers
             }
         }
 
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
+        [Route("[action]")]
+        public IActionResult PorMarcaAuto(int idMarca, int idAuto)
+        {
+            try
+            {
+                var radiadores = (from p in context.Producto
+                                  join ap in context.AutoProducto on p.IdProducto equals ap.IdProducto
+                                  join a in context.Auto on ap.IdAuto equals a.idAuto
+                                  join m in context.Marca on a.idMarca equals m.IdMarca
+                                  where m.IdMarca == idMarca && a.idAuto == idAuto
+                                  select new
+                                  {
+                                      m.NombreMarca,
+                                      a.modelo,
+                                      a.year,
+                                      a.motor,
+                                      p.NombreProducto,
+                                      p.NoParte,
+                                      p.Material,
+                                      p.PrecioNuevoInstalado,
+                                      p.PrecioNuevoSuelto,
+                                      p.PrecioReparadoInstalado,
+                                      p.PrecioReparadoSuelto,
+                                      p.Observaciones,
+                                      p.existencia
+                                  }).ToList();
+                return Ok(radiadores);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
+            }
+        }
+
         // GET api/PorMarca/{marca}
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
