@@ -3,4 +3,9 @@
 https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Users\Lenovo\Documents\Visual Studio 2022\Proyectos\API_RadiadoresDiaz\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-11-05T06:31:36.4562006Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
 </Project>
