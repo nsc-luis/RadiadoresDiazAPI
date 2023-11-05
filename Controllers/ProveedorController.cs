@@ -18,6 +18,22 @@ namespace API_RadiadoresDiaz.Controllers
         // GET api/PorAuto
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
+        public IActionResult Get()
+        {
+            try
+            {
+                var proveedores = context.Proveedor;
+                return Ok(proveedores);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        // GET api/PorAuto
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
         [Route("[action]")]
         public IActionResult PorAuto(int idAuto)
         {

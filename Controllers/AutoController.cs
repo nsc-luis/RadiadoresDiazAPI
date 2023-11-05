@@ -25,6 +25,33 @@ namespace API_RadiadoresDiaz.Controllers
         // GET api/PorModelo
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
+        public IActionResult Get()
+        {
+            try
+            {
+                var autos = (from a in context.Auto
+                             join m in context.Marca on a.idMarca equals m.IdMarca
+                             orderby m.NombreMarca ascending, a.year descending
+                             select new
+                             {
+                                 m.IdMarca,
+                                 m.NombreMarca,
+                                 a.idAuto,
+                                 a.modelo,
+                                 a.year,
+                                 a.motor
+                             }).ToList();
+                return Ok(autos);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        // GET api/PorModelo
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
         [Route("[action]")]
         public IActionResult PorModelo(string modelo)
         {
