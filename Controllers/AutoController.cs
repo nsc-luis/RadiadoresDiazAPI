@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_RadiadoresDiaz.Controllers
 {
@@ -29,6 +30,29 @@ namespace API_RadiadoresDiaz.Controllers
             {
 
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [EnableCors("AllowAnyOrigin")]
+        [Route("[action]")]
+        public IActionResult ListaAnos()
+        {
+            try
+            {
+                var años = context.Auto
+                .Select(a => a.year)
+                .Distinct()
+                .ToList();
+
+
+
+                return Ok(años);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex);
             }
         }
 

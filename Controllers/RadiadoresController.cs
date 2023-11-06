@@ -45,7 +45,7 @@ namespace API_RadiadoresDiaz.Controllers
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
         [Route("[action]")]
-        public IActionResult PorMarcaAuto(int idMarca, int idAuto)
+        public IActionResult PorMarcaAutoYear(int idMarca, int idAuto, int year)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace API_RadiadoresDiaz.Controllers
                                   join ap in context.AutoProducto on p.IdProducto equals ap.IdProducto
                                   join a in context.Auto on ap.IdAuto equals a.idAuto
                                   join m in context.Marca on a.idMarca equals m.IdMarca
-                                  where m.IdMarca == idMarca && a.idAuto == idAuto
+                                  where m.IdMarca == idMarca && a.idAuto == idAuto && a.year ==year
                                   select new
                                   {
                                       m.NombreMarca,
