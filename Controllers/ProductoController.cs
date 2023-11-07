@@ -133,6 +133,7 @@ namespace API_RadiadoresDiaz.Controllers
                                      p.IdProducto,
                                      pv.IdProveedor,
                                      pv.NombreProveedor,
+                                     m.IdMarca,
                                      m.NombreMarca,
                                      a.modelo,
                                      a.year,
@@ -145,7 +146,7 @@ namespace API_RadiadoresDiaz.Controllers
                                      p.PrecioReparadoInstalado,
                                      p.PrecioReparadoSuelto,
                                      p.Observaciones,
-                                     p.existencia
+                                     p.existencia,
                                  }).ToList();
                 return Ok(productos);
             }
@@ -366,6 +367,7 @@ namespace API_RadiadoresDiaz.Controllers
                                       join a in context.Auto on ap.IdAuto equals a.idAuto
                                       join m in context.Marca on a.idMarca equals m.IdMarca
                                       join p in context.Producto on ap.IdProducto equals p.IdProducto
+                                      join pv in context.Proveedor on p.IdProveedor equals pv.IdProveedor
                                       where m.IdMarca == filtro.idMarca && a.year == filtro.year
                                       && (from a in context.Auto
                                           where a.idMarca == filtro.idMarca
@@ -387,7 +389,9 @@ namespace API_RadiadoresDiaz.Controllers
                                           p.PrecioReparadoInstalado,
                                           p.PrecioReparadoSuelto,
                                           p.Observaciones,
-                                          p.existencia
+                                          p.existencia,
+                                          pv.IdProveedor,
+                                          pv.NombreProveedor
                                       }).ToList();
                     return Ok(productos);
                 }
@@ -397,6 +401,7 @@ namespace API_RadiadoresDiaz.Controllers
                                      join a in context.Auto on ap.IdAuto equals a.idAuto
                                      join m in context.Marca on a.idMarca equals m.IdMarca
                                      join p in context.Producto on ap.IdProducto equals p.IdProducto
+                                     join pv in context.Proveedor on p.IdProveedor equals pv.IdProveedor
                                      where m.IdMarca == filtro.idMarca && ap.IdAuto == filtro.idAuto
                                      && a.year == filtro.year
                                      select new
@@ -416,7 +421,9 @@ namespace API_RadiadoresDiaz.Controllers
                                          p.PrecioReparadoInstalado,
                                          p.PrecioReparadoSuelto,
                                          p.Observaciones,
-                                         p.existencia
+                                         p.existencia,
+                                         pv.IdProveedor,
+                                         pv.NombreProveedor
                                      }).ToList();
                     return Ok(productos);
                 }
