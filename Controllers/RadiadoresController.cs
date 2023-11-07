@@ -1,4 +1,5 @@
 ﻿using API_RadiadoresDiaz.Context;
+using API_RadiadoresDiaz.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
@@ -32,7 +33,27 @@ namespace API_RadiadoresDiaz.Controllers
         {
             try
             {
-                var radiadores = context.Producto.ToList();
+                var radiadores = (from p in context.Producto
+                                  join ap in context.AutoProducto on p.IdProducto equals ap.IdProducto
+                                  join a in context.Auto on ap.IdAuto equals a.idAuto
+                                  join m in context.Marca on a.idMarca equals m.IdMarca
+                                  select new
+                                  {
+                                      p.IdProducto,
+                                      m.NombreMarca,
+                                      a.modelo,
+                                      a.year,
+                                      a.motor,
+                                      p.NombreProducto,
+                                      p.NoParte,
+                                      p.Material,
+                                      p.PrecioNuevoInstalado,
+                                      p.PrecioNuevoSuelto,
+                                      p.PrecioReparadoInstalado,
+                                      p.PrecioReparadoSuelto,
+                                      p.Observaciones,
+                                      p.existencia
+                                  }).ToList();
                 return Ok(radiadores);
             }
             catch (Exception ex)
@@ -56,6 +77,7 @@ namespace API_RadiadoresDiaz.Controllers
                                   where m.IdMarca == idMarca && a.idAuto == idAuto && a.year ==year
                                   select new
                                   {
+                                      p.IdProducto,
                                       m.NombreMarca,
                                       a.modelo,
                                       a.year,
