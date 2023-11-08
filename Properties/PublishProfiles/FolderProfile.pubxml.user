@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Users\Lenovo\Documents\Visual Studio 2022\Proyectos\API_RadiadoresDiaz\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-11-07T05:26:59.1131148Z;True|2023-11-05T23:03:07.7908247-06:00;True|2023-11-05T14:43:19.7856233-06:00;True|2023-11-05T00:31:36.4562006-06:00;</History>
+    <History>True|2023-11-08T01:53:49.6614076Z;True|2023-11-07T19:45:18.3097795-06:00;True|2023-11-06T23:26:59.1131148-06:00;True|2023-11-05T23:03:07.7908247-06:00;True|2023-11-05T14:43:19.7856233-06:00;True|2023-11-05T00:31:36.4562006-06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
