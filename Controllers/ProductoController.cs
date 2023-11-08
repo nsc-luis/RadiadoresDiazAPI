@@ -3,6 +3,7 @@ using API_RadiadoresDiaz.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using static API_RadiadoresDiaz.Controllers.AutoController;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -427,6 +428,24 @@ namespace API_RadiadoresDiaz.Controllers
                                      }).ToList();
                     return Ok(productos);
                 }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        // POST api/
+        [HttpPost]
+        [EnableCors("AllowAnyOrigin")]
+        public IActionResult Post([FromBody] Producto p)
+        {
+            try
+            {
+                p.timestamp = DateTime.Now;
+                context.Producto.Add(p);
+                context.SaveChanges();
+                return Ok(p);
             }
             catch (Exception e)
             {

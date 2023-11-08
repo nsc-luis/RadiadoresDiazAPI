@@ -3,6 +3,7 @@ using API_RadiadoresDiaz.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_RadiadoresDiaz.Controllers
 {
@@ -20,6 +21,15 @@ namespace API_RadiadoresDiaz.Controllers
         {
             public int idMarca { get; set; }
             public int year { get; set; }
+        }
+
+        public class AltaEdicionAuto
+        {
+            public int idMarca { get; set; }
+            public string modelo { get; set; }
+            public int year { get; set; }
+            [Precision(2, 1)]
+            public Decimal motor { get; set; }
         }
 
         // GET api/PorModelo
@@ -168,6 +178,31 @@ namespace API_RadiadoresDiaz.Controllers
                                  a.motor
                              }).ToList();
                 return Ok(autos);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        // POST api/
+        [HttpPost]
+        [EnableCors("AllowAnyOrigin")]
+        public IActionResult Post([FromBody] AltaEdicionAuto a)
+        {
+            try
+            {
+                Auto altaAuto = new Auto
+                {
+                    idMarca = a.idMarca,
+                    motor = a.motor,
+                    modelo = a.modelo,
+                    year = a.year,
+                    timestamp = DateTime.Now
+                };
+                context.Auto.Add(altaAuto);
+                context.SaveChanges();
+                return Ok(a);
             }
             catch (Exception e)
             {
