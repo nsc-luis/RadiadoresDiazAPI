@@ -1,4 +1,5 @@
 ﻿using API_RadiadoresDiaz.Context;
+using API_RadiadoresDiaz.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace API_RadiadoresDiaz.Controllers
             this.context = context;
         }
 
-        // GET api/
+        // GET api/Marca
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
         public IActionResult Get()
@@ -32,7 +33,7 @@ namespace API_RadiadoresDiaz.Controllers
             }
         }
 
-        // GET api/PorYear
+        // GET api/Marca/PorYear
         [HttpGet]
         [EnableCors("AllowAnyOrigin")]
         [Route("[action]")]
@@ -66,6 +67,27 @@ namespace API_RadiadoresDiaz.Controllers
             }
             catch (Exception e)
             {
+                return BadRequest(e);
+            }
+        }
+
+        // POST api/Marca/{nombreMarca}
+        [HttpPost("{nombreMarca}")]
+        [EnableCors("AllowAnyOrigin")]
+        public IActionResult Post(string nombreMarca)
+        {
+            try
+            {
+                Marca marca = new Marca
+                {
+                    NombreMarca = nombreMarca,
+                    timestamp = DateTime.Now,
+                };
+                context.Marca.Add(marca);
+                context.SaveChanges();
+                return Ok(marca);
+            }
+            catch (Exception e) {
                 return BadRequest(e);
             }
         }

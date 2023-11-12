@@ -1,4 +1,5 @@
 ﻿using API_RadiadoresDiaz.Context;
+using API_RadiadoresDiaz.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,28 @@ namespace API_RadiadoresDiaz.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex);
+            }
+        }
+
+        // POST api/Proveedor/{nombreProveedor}
+        [HttpPost("{nombreProveedor}")]
+        [EnableCors("AllowAnyOrigin")]
+        public IActionResult Post(string nombreProveedor)
+        {
+            try
+            {
+                Proveedor proveedor = new Proveedor
+                {
+                    NombreProveedor = nombreProveedor,
+                    timestamp = DateTime.Now,
+                };
+                context.Proveedor.Add(proveedor);
+                context.SaveChanges();
+                return Ok(proveedor);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
             }
         }
     }
