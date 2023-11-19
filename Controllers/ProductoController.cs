@@ -362,7 +362,72 @@ namespace API_RadiadoresDiaz.Controllers
         {
             try
             {
-                if (filtro.idAuto == 0)
+                if (filtro.year == 0 && filtro.idAuto == 0)
+                {
+                    var productos = (from ap in context.AutoProducto
+                                     join a in context.Auto on ap.IdAuto equals a.idAuto
+                                     join m in context.Marca on a.idMarca equals m.IdMarca
+                                     join p in context.Producto on ap.IdProducto equals p.IdProducto
+                                     join pv in context.Proveedor on p.IdProveedor equals pv.IdProveedor
+                                     where m.IdMarca == filtro.idMarca
+                                     && (from a in context.Auto
+                                         where a.idMarca == filtro.idMarca
+                                         select a.idAuto).Contains(ap.IdAuto)
+                                     select new
+                                     {
+                                         m.IdMarca,
+                                         m.NombreMarca,
+                                         a.idAuto,
+                                         a.modelo,
+                                         a.year,
+                                         a.motor,
+                                         p.IdProducto,
+                                         p.NombreProducto,
+                                         p.NoParte,
+                                         p.Material,
+                                         p.PrecioNuevoInstalado,
+                                         p.PrecioNuevoSuelto,
+                                         p.PrecioReparadoInstalado,
+                                         p.PrecioReparadoSuelto,
+                                         p.Observaciones,
+                                         p.existencia,
+                                         pv.IdProveedor,
+                                         pv.NombreProveedor
+                                     }).ToList();
+                    return Ok(productos);
+                }
+                else if (filtro.idMarca != 0 && filtro.idAuto != 0)
+                {
+                    var productos = (from ap in context.AutoProducto
+                                     join a in context.Auto on ap.IdAuto equals a.idAuto
+                                     join m in context.Marca on a.idMarca equals m.IdMarca
+                                     join p in context.Producto on ap.IdProducto equals p.IdProducto
+                                     join pv in context.Proveedor on p.IdProveedor equals pv.IdProveedor
+                                     where m.IdMarca == filtro.idMarca && a.idAuto == filtro.idAuto
+                                     select new
+                                     {
+                                         m.IdMarca,
+                                         m.NombreMarca,
+                                         a.idAuto,
+                                         a.modelo,
+                                         a.year,
+                                         a.motor,
+                                         p.IdProducto,
+                                         p.NombreProducto,
+                                         p.NoParte,
+                                         p.Material,
+                                         p.PrecioNuevoInstalado,
+                                         p.PrecioNuevoSuelto,
+                                         p.PrecioReparadoInstalado,
+                                         p.PrecioReparadoSuelto,
+                                         p.Observaciones,
+                                         p.existencia,
+                                         pv.IdProveedor,
+                                         pv.NombreProveedor
+                                     }).ToList();
+                    return Ok(productos);
+                }
+                else if (filtro.idAuto == 0)
                 {
                     var productos = (from ap in context.AutoProducto
                                       join a in context.Auto on ap.IdAuto equals a.idAuto
