@@ -1,0 +1,12 @@
+
+{
+    "profile" : "default",
+    "region"  : "us-east-2",
+    "configuration" : "Release",
+    "function-runtime" : "dotnet6",
+    "s3-prefix"        : "radiadoresDiaz/",
+    "template"         : "serverless.template",
+    "template-parameters" : "",
+    "s3-bucket"           : "radiadoresdiazbucket",
+    "stack-name"          : "radiadoresDiazStack"
+}
